@@ -16,6 +16,7 @@ const body = {};
 const auth = Buffer.from(`${user}:${pwd}`, 'utf8').toString('base64')
 
 var token = '';
+var resData = '';
 
 const app = express();
 app.use(express.json());
@@ -29,7 +30,7 @@ app.get('/', function (req, res) {
 
 app.get('/api/', function (req, res) {
     console.log("funciona");
-    console.log(req.query.api)
+    //console.log(req.query.api)
     axios.post('https://api.ariba.com/v2/oauth/token?grant_type=openapi_2lo', body, {
         headers: {
             'Authorization': `Basic ${auth}`
@@ -37,7 +38,7 @@ app.get('/api/', function (req, res) {
     })
         .then(response => {
             token = response.data.access_token;
-            console.log(token);
+            //console.log(token);
             axios.get(`https://openapi.ariba.com/api/sourcing-reporting-details/v1/prod/views/${req.query.api}`, {
                 headers: {
                     'Authorization': `Bearer ${token}`
@@ -54,17 +55,18 @@ app.get('/api/', function (req, res) {
 
 
             }).then(response => {
-                console.log(response.data);
+                //console.log(response.data);
+                resData = response.data;
+                res.send(resData)
             })
                 .catch((error) => {
-                    console.error(error.response.data)
+                    console.error(error)
                 })
         })
         .catch((error) => {
             console.error("falla segundo")
         })
-
-    //res.send(200);
+        //res.status(200).send(resData);
 })
 
 const server = http.createServer(app);
