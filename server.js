@@ -68,6 +68,6 @@ app.get('/api/', function (req, res) {
 })
 
 const server = http.createServer(app);
-const port = PROCESS_ENV_PORT || 3008;
+const port = process.env.PORT || 3008;
 server.listen(port);
 console.debug('Server listening on port ' + port);
