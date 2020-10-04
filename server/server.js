@@ -6,7 +6,9 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const axios = require('axios');
 
+
 /* Constantes del programa */
+
 
 const user = "64e7fde8-a04c-4bb4-9297-5aba1ff3e9a1";
 const pwd = "1FdK9A1gqJq7C2lmz08bieIp2h2BwYe2";
