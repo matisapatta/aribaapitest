@@ -116,6 +116,47 @@ app.get('/api/sourcing/views', function (req, res) {
         //res.status(200).send(resData);
 })
 
+app.get('/api/sourcing/metadata', function (req, res) {
+    console.log("funciona");
+    //console.log(req.query.api)
+    axios.post('https://api.ariba.com/v2/oauth/token?grant_type=openapi_2lo', body, {
+        headers: {
+            'Authorization': `Basic ${authSourcing}`
+        }
+    })
+        .then(response => {
+            token = response.data.access_token;
+            //console.log(token);
+            axios.get(`https://openapi.ariba.com/api/sourcing-reporting-view/v1/prod/metadata`, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                },
+                params: {
+                    'realm': 'sanmiguelglobal-t',
+                    'apikey': apikeySourcing,
+                    //'filters': '%7B%22createdDateFrom%22%3A%222020-09-09T23%3A55%3A31Z%22%2C%22createdDateTo%22%3A%222020-09-28T10%3A00%3A00Z%22%7D'
+                    // 'filters': {
+                    //     createdDateFrom:'2020-08-04T00:00:00Z',
+                    //     createdDateTo:'2020-10-04T00:00:00Z'
+                    // }
+                }
+
+
+            }).then(response => {
+                //console.log(response.data);
+                resData = response.data;
+                res.send(resData)
+            })
+                .catch((error) => {
+                    console.error(error)
+                })
+        })
+        .catch((error) => {
+            console.error("falla segundo")
+        })
+        //res.status(200).send(resData);
+})
+
 app.get('/api/analytics/', function (req, res) {
     console.log("funciona");
     //console.log(req.query.api)
@@ -175,6 +216,47 @@ app.get('/api/analytics/views', function (req, res) {
                 params: {
                     'realm': 'sanmiguelglobal-t',
                     'apikey': apikeyAn,
+                    //'filters': '%7B%22createdDateFrom%22%3A%222020-09-09T23%3A55%3A31Z%22%2C%22createdDateTo%22%3A%222020-09-28T10%3A00%3A00Z%22%7D'
+                    // 'filters': {
+                    //     createdDateFrom:'2020-08-04T00:00:00Z',
+                    //     createdDateTo:'2020-10-04T00:00:00Z'
+                    // }
+                }
+
+
+            }).then(response => {
+                //console.log(response.data);
+                resData = response.data;
+                res.send(resData)
+            })
+                .catch((error) => {
+                    console.error(error)
+                })
+        })
+        .catch((error) => {
+            console.error("falla segundo")
+        })
+        //res.status(200).send(resData);
+})
+
+app.get('/api/analytics/metadata', function (req, res) {
+    console.log("funciona");
+    //console.log(req.query.api)
+    axios.post('https://api.ariba.com/v2/oauth/token?grant_type=openapi_2lo', body, {
+        headers: {
+            'Authorization': `Basic ${authSourcing}`
+        }
+    })
+        .then(response => {
+            token = response.data.access_token;
+            //console.log(token);
+            axios.get(`https://openapi.ariba.com/api/analytics-reporting-view/v1/prod/metadata`, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                },
+                params: {
+                    'realm': 'sanmiguelglobal-t',
+                    'apikey': apikeySourcing,
                     //'filters': '%7B%22createdDateFrom%22%3A%222020-09-09T23%3A55%3A31Z%22%2C%22createdDateTo%22%3A%222020-09-28T10%3A00%3A00Z%22%7D'
                     // 'filters': {
                     //     createdDateFrom:'2020-08-04T00:00:00Z',
