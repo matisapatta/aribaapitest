@@ -242,7 +242,7 @@ app.get('/api/analytics/views', function (req, res) {
 app.get('/api/analytics/metadata', function (req, res) {
     console.log("funciona");
     //console.log(req.query.api)
-    axios.post('https://api.ariba.com/v2/oauth/token?grant_type=openapi_2lo', body, {
+    axios.post('https://api.ariba.com/v2/oauth/token?grant_type=client_credentials', body, {
         headers: {
             'Authorization': `Basic ${authSourcing}`
         }
@@ -256,7 +256,7 @@ app.get('/api/analytics/metadata', function (req, res) {
                 },
                 params: {
                     'realm': 'sanmiguelglobal-t',
-                    'apikey': apikeySourcing,
+                    'apikey': apikeyAn,
                     //'filters': '%7B%22createdDateFrom%22%3A%222020-09-09T23%3A55%3A31Z%22%2C%22createdDateTo%22%3A%222020-09-28T10%3A00%3A00Z%22%7D'
                     // 'filters': {
                     //     createdDateFrom:'2020-08-04T00:00:00Z',
