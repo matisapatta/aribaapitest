@@ -242,7 +242,7 @@ app.get('/api/analytics/views', function (req, res) {
 app.get('/api/analytics/metadata', function (req, res) {
     console.log("funciona");
     //console.log(req.query.api)
-    axios.post('https://api.ariba.com/v2/oauth/token?grant_type=client_credentials', body, {
+    axios.post('https://api.ariba.com/v2/oauth/token?grant_type=openapi_2lo', body, {
         headers: {
             'Authorization': `Basic ${authSourcing}`
         }
